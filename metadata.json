@@ -1,0 +1,6 @@
+{
+  "name": "Pro Square Tiling",
+  "description": "A frontend-only website for Pro Square Tiling featuring a photo gallery and quote request form.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

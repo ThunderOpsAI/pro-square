@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUOTED
+  WON
+  LOST
+}
+
+enum AiTriageStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model Quote {
+  id                String         @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String
+  phone             String
+  projectType       String
+  message           String
+  status            LeadStatus     @default(NEW)
+  aiSummary         String?        @db.Text
+  aiEstimateLow     Float?
+  aiEstimateHigh    Float?
+  aiDraftProposal   String?        @db.Text
+  aiTriageStatus    AiTriageStatus @default(PENDING)
+  ipHash            String?
+  turnstileVerified Boolean        @default(false)
+  source            String?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model CallLog {
+  id        String   @id @default(cuid())
+  intent    String   @default("call")
+  referrer  String?
+  userAgent String?
+  ipHash    String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}

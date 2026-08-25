@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-900: var(--primary-900);
+  
+  --color-surface-50: var(--surface-50);
+  --color-surface-100: var(--surface-100);
+  --color-surface-200: var(--surface-200);
+  --color-surface-300: var(--surface-300);
+  --color-surface-400: var(--surface-400);
+  --color-surface-500: var(--surface-500);
+  --color-surface-600: var(--surface-600);
+  --color-surface-700: var(--surface-700);
+  --color-surface-800: var(--surface-800);
+  --color-surface-900: var(--surface-900);
+  --color-surface-950: var(--surface-950);
+}
+
+:root {
+  /* Default: Current Slate & Blue */
+  --primary-400: #60a5fa; 
+  --primary-500: #3b82f6; 
+  --primary-600: #2563eb; 
+  --primary-900: #1e3a8a;
+  
+  --surface-50: #f8fafc; 
+  --surface-100: #f1f5f9; 
+  --surface-200: #e2e8f0; 
+  --surface-300: #cbd5e1; 
+  --surface-400: #94a3b8; 
+  --surface-500: #64748b; 
+  --surface-600: #475569; 
+  --surface-700: #334155; 
+  --surface-800: #1e293b; 
+  --surface-900: #0f172a; 
+  --surface-950: #020617; 
+}
+
+.theme-terracotta {
+  /* Warm Stone & Terracotta */
+  --primary-400: #fb923c; 
+  --primary-500: #f97316; 
+  --primary-600: #ea580c; 
+  --primary-900: #7c2d12;
+  
+  --surface-50: #fafaf9; 
+  --surface-100: #f5f5f4; 
+  --surface-200: #e7e5e4; 
+  --surface-300: #d6d3d1; 
+  --surface-400: #a8a29e; 
+  --surface-500: #78716c; 
+  --surface-600: #57534e; 
+  --surface-700: #44403c; 
+  --surface-800: #292524; 
+  --surface-900: #1c1917; 
+  --surface-950: #0c0a09; 
+}
+
+.theme-emerald {
+  /* Charcoal & Emerald */
+  --primary-400: #34d399; 
+  --primary-500: #10b981; 
+  --primary-600: #059669; 
+  --primary-900: #064e3b;
+  
+  --surface-50: #f9fafb; 
+  --surface-100: #f3f4f6; 
+  --surface-200: #e5e7eb; 
+  --surface-300: #d1d5db; 
+  --surface-400: #9ca3af; 
+  --surface-500: #6b7280; 
+  --surface-600: #4b5563; 
+  --surface-700: #374151; 
+  --surface-800: #1f2937; 
+  --surface-900: #111827; 
+  --surface-950: #030712; 
+}
+
+.theme-copper {
+  /* Concrete & Copper */
+  --primary-400: #fbbf24; 
+  --primary-500: #f59e0b; 
+  --primary-600: #d97706; 
+  --primary-900: #78350f;
+  
+  --surface-50: #fafafa; 
+  --surface-100: #f5f5f5; 
+  --surface-200: #e5e5e5; 
+  --surface-300: #d4d4d4; 
+  --surface-400: #a3a3a3; 
+  --surface-500: #737373; 
+  --surface-600: #525252; 
+  --surface-700: #404040; 
+  --surface-800: #262626; 
+  --surface-900: #171717; 
+  --surface-950: #0a0a0a; 
+}
