@@ -421,6 +421,25 @@ function LeadsManager() {
               )}
             </div>
 
+            {/* Convert to Detailed Quote CTA */}
+            <div className="bg-primary-950/40 border border-primary-800/60 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div>
+                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 text-primary-400" />
+                  Convert Lead to Formal Quote
+                </h4>
+                <p className="text-xs text-surface-400 mt-0.5">
+                  Launch the interactive material & glue/grout calculator pre-filled with this client's details.
+                </p>
+              </div>
+              <a
+                href={`/admin/quotes/new?leadId=${selectedLead.id}`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap"
+              >
+                Build & Price Quote &rarr;
+              </a>
+            </div>
+
             {/* Quick Status Updater */}
             <div className="border-t border-surface-800 pt-4 flex flex-wrap items-center justify-between gap-3">
               <span className="text-xs text-surface-400">Update Lead Workflow Status:</span>

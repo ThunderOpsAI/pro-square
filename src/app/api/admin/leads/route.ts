@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Prisma, LeadStatus } from '@prisma/client';
 import prisma from '@/lib/prisma';
 import { getSession } from '@/lib/session';
 
@@ -10,16 +11,16 @@ export async function GET(req: NextRequest) {
 
   try {
     const { searchParams } = new URL(req.url);
-    const status = searchParams.get('status');
+    const status = searchParams.get('status')?.toUpperCase();
     const search = searchParams.get('search')?.trim();
     const page = Math.max(parseInt(searchParams.get('page') || '1', 10), 1);
     const limit = Math.min(Math.max(parseInt(searchParams.get('limit') || '20', 10), 1), 100);
     const skip = (page - 1) * limit;
 
-    const where: any = {};
+    const where: Prisma.QuoteWhereInput = {};
 
-    if (status && status !== 'ALL') {
-      where.status = status;
+    if (status && status !== 'ALL' && Object.values(LeadStatus).includes(status as LeadStatus)) {
+      where.status = status as LeadStatus;
     }
 
     if (search) {

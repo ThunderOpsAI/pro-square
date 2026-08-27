@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Hammer, LayoutDashboard, Users, PhoneCall, ExternalLink, LogOut } from 'lucide-react';
+import { Hammer, LayoutDashboard, Users, PhoneCall, DollarSign, ExternalLink, LogOut, Calculator } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -31,7 +31,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navItems = [
     { name: 'Dashboard Overview', href: '/admin', icon: LayoutDashboard },
     { name: 'Leads Pipeline', href: '/admin/leads', icon: Users },
+    { name: 'Quotes & Estimator', href: '/admin/quotes', icon: Calculator },
     { name: 'Call Tracking Logs', href: '/admin/call-logs', icon: PhoneCall },
+    { name: 'Budget & Ledger', href: '/admin/budget', icon: DollarSign },
   ];
 
   return (
