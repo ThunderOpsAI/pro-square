@@ -117,6 +117,9 @@ export function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const activeSpace = SPACES[selectedIdx];
 
+  const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
+  const cleanPhone = phone.replace(/[^0-9]/g, '');
+
   const handleMouseMove = (e: React.MouseEvent) => {
     const x = (e.clientX / window.innerWidth - 0.5) * -20;
     const y = (e.clientY / window.innerHeight - 0.5) * -20;
@@ -248,11 +251,11 @@ export function Hero() {
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
               </a>
               <a
-                href="tel:5551234567"
+                href={`tel:${cleanPhone}`}
                 className="inline-flex items-center justify-center px-6 py-3.5 text-sm sm:text-base font-semibold rounded-xl text-white bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 transition-all duration-300"
               >
                 <PhoneCall className="mr-2 h-4 w-4 text-primary-400" />
-                Call (555) 123-4567
+                Call {phone}
               </a>
             </div>
           </div>
