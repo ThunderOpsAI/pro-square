@@ -1,6 +1,7 @@
 'use client';
 
-import { Hammer, Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import Image from 'next/image';
 
 export function Footer() {
   const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '(555) 123-4567';
@@ -22,16 +23,19 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-surface-200 text-surface-600 py-12 bg-hex-pattern transition-colors duration-500">
+    <footer className="bg-black/[0.08] text-surface-600 py-12 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
           
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="bg-gradient-to-br from-primary-500 to-primary-600 p-2 rounded-lg">
-                <Hammer className="h-5 w-5 text-surface-900" />
-              </div>
-              <span className="text-xl font-bold tracking-tight text-surface-900">Pro Square Tiling</span>
+              <Image
+                src="/images/pro-square-logo.png"
+                alt="Pro Square Tiling"
+                width={180}
+                height={68}
+                className="h-10 w-auto object-contain rounded-lg"
+              />
             </div>
             <p className="leading-relaxed transition-colors">
               Setting the standard for quality tiling services. We deliver precision, durability, and stunning aesthetics for every project.

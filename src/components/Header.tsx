@@ -1,8 +1,9 @@
 'use client';
 
-import { Menu, X, Hammer, Phone } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import Image from 'next/image';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,12 +45,16 @@ export function Header() {
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3"
+            className="flex items-center gap-2"
           >
-            <div className="bg-gradient-to-br from-primary-500 to-primary-600 p-2.5 rounded-xl shadow-lg shadow-primary-600/20">
-              <Hammer className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-surface-900 transition-colors">Pro Square Tiling</span>
+            <Image
+              src="/images/pro-square-logo.png"
+              alt="Pro Square Tiling"
+              width={200}
+              height={76}
+              className="h-12 w-auto object-contain rounded-lg drop-shadow-md"
+              priority
+            />
           </motion.div>
           
           <motion.nav 

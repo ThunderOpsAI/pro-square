@@ -54,10 +54,10 @@ const cardVariants: Variants = {
 
 export function Services() {
   return (
-    <section id="services" className="py-20 bg-surface-50 relative overflow-hidden bg-grid-pattern transition-colors duration-500">
+    <section id="services" className="py-20 relative overflow-hidden transition-colors duration-500">
       {/* Subtle top/bottom gradients for depth */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-surface-100/50 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-surface-100 to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/[0.03] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/[0.03] to-transparent pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
