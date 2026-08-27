@@ -98,3 +98,35 @@
   --surface-900: #171717; 
   --surface-950: #0a0a0a; 
 }
+
+/* Subtle Architectural Tile Pattern Overlays */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-herringbone-pattern {
+  /* Architectural Herringbone Pattern */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='80' viewBox='0 0 40 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.04'%3E%3Cpath d='M20 0L0 20v40l20 20 20-20V20L20 0zm0 40L0 60m40 0L20 40M0 20l20 20m20-20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bg-subway-pattern {
+  /* Classic Offset Subway Tile Pattern */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cg fill='none' stroke='%23000000' stroke-width='1.5' stroke-opacity='0.04'%3E%3Cpath d='M0 40V0H80 M40 40V20'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bg-tile-pattern-dark {
+  /* Used for dark overlays like Hero/Quote */
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-diagonal-pattern {
+  /* Architectural Herringbone/Chevron for accents */
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+

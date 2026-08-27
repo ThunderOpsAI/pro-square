@@ -22,16 +22,16 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-surface-950 text-surface-400 py-12 border-t border-surface-800 transition-colors duration-500">
+    <footer className="bg-surface-200 text-surface-600 py-12 bg-hex-pattern transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
           
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-gradient-to-br from-primary-500 to-primary-600 p-2 rounded-lg">
-                <Hammer className="h-5 w-5 text-white" />
+                <Hammer className="h-5 w-5 text-surface-900" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">Pro Square Tiling</span>
+              <span className="text-xl font-bold tracking-tight text-surface-900">Pro Square Tiling</span>
             </div>
             <p className="leading-relaxed transition-colors">
               Setting the standard for quality tiling services. We deliver precision, durability, and stunning aesthetics for every project.
@@ -39,21 +39,21 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Contact Info</h3>
+            <h3 className="text-surface-900 font-semibold mb-6 uppercase tracking-wider text-sm">Contact Info</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-primary-500 shrink-0 transition-colors" />
                 <a 
                   href={`tel:${cleanPhone || '5551234567'}`}
                   onClick={handlePhoneClick}
-                  className="transition-colors hover:text-white"
+                  className="transition-colors hover:text-surface-900"
                 >
                   {phoneNumber}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-primary-500 shrink-0 transition-colors" />
-                <a href="mailto:info@prosquaretiling.com" className="transition-colors hover:text-white">
+                <a href="mailto:info@prosquaretiling.com" className="transition-colors hover:text-surface-900">
                   info@prosquaretiling.com
                 </a>
               </li>
@@ -65,26 +65,26 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Business Hours</h3>
+            <h3 className="text-surface-900 font-semibold mb-6 uppercase tracking-wider text-sm">Business Hours</h3>
             <ul className="space-y-2">
               <li className="flex justify-between">
                 <span className="transition-colors">Monday - Friday:</span>
-                <span className="text-white">8:00 AM - 6:00 PM</span>
+                <span className="text-surface-900">8:00 AM - 6:00 PM</span>
               </li>
               <li className="flex justify-between">
                 <span className="transition-colors">Saturday:</span>
-                <span className="text-white">9:00 AM - 2:00 PM</span>
+                <span className="text-surface-900">9:00 AM - 2:00 PM</span>
               </li>
               <li className="flex justify-between">
                 <span className="transition-colors">Sunday:</span>
-                <span className="text-surface-500 transition-colors">Closed</span>
+                <span className="text-surface-600 transition-colors">Closed</span>
               </li>
             </ul>
           </div>
           
         </div>
         
-        <div className="mt-12 pt-8 border-t border-surface-800 text-center text-sm transition-colors">
+        <div className="mt-12 pt-8 border-t border-surface-300 text-center text-sm transition-colors">
           <p className="transition-colors">&copy; {new Date().getFullYear()} Pro Square Tiling. All rights reserved.</p>
         </div>
       </div>

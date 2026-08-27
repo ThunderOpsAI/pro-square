@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Loader2, Phone, ShieldCheck, Clock, Award } from 'lucide-react';
 import { motion, type Variants } from 'motion/react';
+import Image from 'next/image';
 import { Turnstile } from '@marsidev/react-turnstile';
 import { QuoteInputSchema } from '@/lib/schemas';
 
@@ -24,11 +25,6 @@ const initialForm: FormState = {
   message: '',
 };
 
-const stepVariants: Variants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
-};
-
 export function QuoteForm() {
   const [formData, setFormData] = useState<FormState>(initialForm);
   const [turnstileToken, setTurnstileToken] = useState<string>('');
@@ -37,6 +33,7 @@ export function QuoteForm() {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
+  const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '(555) 123-4567';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -101,256 +98,237 @@ export function QuoteForm() {
   };
 
   return (
-    <section id="quote" className="py-32 bg-surface-100 relative overflow-hidden transition-colors duration-500">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-primary-500/10 via-surface-100 to-surface-100 pointer-events-none transition-colors" />
-      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary-200/50 blur-[120px] rounded-full pointer-events-none mix-blend-multiply transition-colors duration-500" />
-      
+    <section id="quote" className="py-20 relative overflow-hidden bg-surface-200 text-surface-900 bg-hex-pattern transition-colors duration-500 border-t border-surface-300/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.2 } }
-            }}
-          >
-            <motion.h2 
-              variants={stepVariants}
-              className="text-4xl font-bold tracking-tight text-surface-900 sm:text-5xl leading-tight transition-colors"
-            >
-              Ready to start your project?
-            </motion.h2>
-            <motion.p 
-              variants={stepVariants}
-              className="mt-6 text-xl text-surface-600 leading-relaxed font-light transition-colors"
-            >
-              Fill out the form with details about your space. We'll get back to you within 24 hours to schedule a free on-site consultation and measurement.
-            </motion.p>
-            
-            <div className="mt-16 space-y-10">
-              {[
-                { step: '1', title: 'Request a Quote', desc: 'Tell us about your project, tile preferences, and vision.' },
-                { step: '2', title: 'On-Site Measure & Estimate', desc: 'We assess the space, calculate materials, and provide a transparent quote.' },
-                { step: '3', title: 'Master Craftsmanship', desc: 'Precision installation with 100% waterproof guarantee.' }
-              ].map((item, i) => (
-                <motion.div key={i} variants={stepVariants} className="flex gap-6 group">
-                  <div className="relative">
-                    <div className="w-14 h-14 rounded-2xl bg-white border border-surface-200 flex items-center justify-center shrink-0 group-hover:bg-primary-600 group-hover:border-primary-500 transition-all duration-500 shadow-sm group-hover:shadow-primary-600/30 group-hover:scale-110">
-                      <span className="text-primary-600 group-hover:text-white font-bold text-xl transition-colors duration-300">{item.step}</span>
-                    </div>
-                    {i !== 2 && (
-                      <div className="absolute top-14 bottom-[-40px] left-1/2 w-px bg-gradient-to-b from-surface-300 to-transparent -translate-x-1/2 transition-colors duration-500" />
-                    )}
-                  </div>
-                  <div className="pt-2">
-                    <h4 className="text-surface-900 font-semibold text-xl mb-2 transition-colors">{item.title}</h4>
-                    <p className="text-surface-500 font-light transition-colors">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
+          {/* LEFT: VALUE PROPOSITION */}
+          <div className="lg:col-span-5">
+            <span className="inline-block py-1 px-3.5 rounded-full bg-primary-100 text-primary-700 border-primary-200 text-xs font-bold tracking-widest uppercase mb-4 border border-primary-500/30">
+              Get an Accurate Estimate
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-surface-900 leading-tight">
+              Ready to Upgrade Your Space?
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-surface-600 font-light leading-relaxed">
+              Send us your project scope for a transparent, itemized estimate. We offer free on-site measurements across Melbourne.
+            </p>
+
+            <div className="mt-8 space-y-4">
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/60 border border-surface-300 shadow-sm backdrop-blur-md">
+                <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-surface-900">100% Waterproof Certified</h4>
+                  <p className="text-[11px] text-surface-600">Strict AS 3740 & AS 3958.1 Compliance</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/60 border border-surface-300 shadow-sm backdrop-blur-md">
+                <Clock className="w-5 h-5 text-primary-600 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-surface-900">Fast 24-Hour Response</h4>
+                  <p className="text-[11px] text-surface-600">Direct trade advice & pricing breakdown</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/60 border border-surface-300 shadow-sm backdrop-blur-md">
+                <Award className="w-5 h-5 text-amber-600 shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-surface-900">10-Year Craftsmanship Guarantee</h4>
+                  <p className="text-[11px] text-surface-600">Backed by premium European adhesives & grouts</p>
+                </div>
+              </div>
             </div>
-          </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, x: 50, rotateY: -10 }}
-            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            style={{ perspective: 1000 }}
-            className="bg-white/90 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 sm:p-12 shadow-2xl shadow-surface-300/50 relative transition-colors duration-500"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-[2.5rem] -z-10 blur-xl pointer-events-none transition-colors" />
+            <div className="mt-8 pt-6 border-t border-surface-300/50 flex items-center gap-3">
+              <Phone className="w-4 h-4 text-primary-600" />
+              <span className="text-xs text-surface-600">Prefer to speak directly? Call <a href={`tel:${phoneNumber.replace(/[^0-9+]/g, '')}`} className="font-bold text-white hover:text-primary-600 underline ml-1">{phoneNumber}</a></span>
+            </div>
+          </div>
 
-            {status === 'success' ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-12"
-              >
+          {/* RIGHT: COMPACT HIGH-CONVERTING QUOTE FORM */}
+          <div className="lg:col-span-7">
+            <div className="bg-white/80 backdrop-blur-xl border border-surface-300 rounded-3xl p-6 sm:p-8 shadow-xl relative">
+              
+              {status === 'success' ? (
                 <motion.div 
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
-                  className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner shadow-emerald-100"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
                 >
-                  <CheckCircle2 className="h-12 w-12 text-emerald-600" />
+                  <div className="w-16 h-16 bg-emerald-500/20 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-200">
+                    <CheckCircle2 className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-surface-900 mb-2">Quote Request Sent!</h3>
+                  <p className="text-surface-700 text-xs sm:text-sm font-light leading-relaxed mb-6">
+                    Thank you. We have received your project details and will be in touch within 24 hours.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setStatus('idle')}
+                    className="px-6 py-2.5 bg-white hover:bg-surface-800 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                  >
+                    Submit Another Request
+                  </button>
                 </motion.div>
-                <h3 className="text-3xl font-bold text-surface-900 mb-4 transition-colors">Quote Request Sent!</h3>
-                <p className="text-surface-600 text-lg font-light leading-relaxed mb-8">
-                  Thank you. We have received your project details and dispatched a confirmation to your email. Our team will contact you shortly!
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setStatus('idle')}
-                  className="px-8 py-3.5 bg-surface-100 hover:bg-surface-200 text-surface-800 rounded-xl font-semibold transition-colors cursor-pointer"
-                >
-                  Submit Another Request
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {status === 'error' && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3 text-red-700 text-sm"
-                  >
-                    <AlertCircle className="h-5 w-5 shrink-0 text-red-600" />
-                    <span>{errorMessage || 'Failed to submit quote. Please check your information and try again.'}</span>
-                  </motion.div>
-                )}
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-surface-700 mb-2 ml-1">
-                      First Name <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                      type="text" 
-                      id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      required 
-                      disabled={status === 'submitting'}
-                      className={`w-full px-5 py-4 rounded-2xl bg-surface-50 border text-surface-900 placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all shadow-inner shadow-surface-200/20 ${fieldErrors.firstName ? 'border-red-400 bg-red-50/30' : 'border-surface-200'}`}
-                      placeholder="John" 
-                    />
-                    {fieldErrors.firstName && <p className="mt-1 text-xs text-red-600 ml-1">{fieldErrors.firstName}</p>}
-                  </div>
-                  <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-surface-700 mb-2 ml-1">
-                      Last Name <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                      type="text" 
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      required 
-                      disabled={status === 'submitting'}
-                      className={`w-full px-5 py-4 rounded-2xl bg-surface-50 border text-surface-900 placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all shadow-inner shadow-surface-200/20 ${fieldErrors.lastName ? 'border-red-400 bg-red-50/30' : 'border-surface-200'}`}
-                      placeholder="Doe" 
-                    />
-                    {fieldErrors.lastName && <p className="mt-1 text-xs text-red-600 ml-1">{fieldErrors.lastName}</p>}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-surface-700 mb-2 ml-1">
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                      type="email" 
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required 
-                      disabled={status === 'submitting'}
-                      className={`w-full px-5 py-4 rounded-2xl bg-surface-50 border text-surface-900 placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all shadow-inner shadow-surface-200/20 ${fieldErrors.email ? 'border-red-400 bg-red-50/30' : 'border-surface-200'}`}
-                      placeholder="john@example.com" 
-                    />
-                    {fieldErrors.email && <p className="mt-1 text-xs text-red-600 ml-1">{fieldErrors.email}</p>}
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-surface-700 mb-2 ml-1">
-                      Phone Number <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                      type="tel" 
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required 
-                      disabled={status === 'submitting'}
-                      className={`w-full px-5 py-4 rounded-2xl bg-surface-50 border text-surface-900 placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all shadow-inner shadow-surface-200/20 ${fieldErrors.phone ? 'border-red-400 bg-red-50/30' : 'border-surface-200'}`}
-                      placeholder="(0400) 000-000" 
-                    />
-                    {fieldErrors.phone && <p className="mt-1 text-xs text-red-600 ml-1">{fieldErrors.phone}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="projectType" className="block text-sm font-medium text-surface-700 mb-2 ml-1">
-                    Project Type <span className="text-red-500">*</span>
-                  </label>
-                  <select 
-                    id="projectType"
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    required 
-                    disabled={status === 'submitting'}
-                    className={`w-full px-5 py-4 rounded-2xl bg-surface-50 border text-surface-900 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all appearance-none shadow-inner shadow-surface-200/20 ${fieldErrors.projectType ? 'border-red-400 bg-red-50/30' : 'border-surface-200'}`}
-                  >
-                    <option value="" disabled>Select a service...</option>
-                    <option value="bathroom">Bathroom Renovation</option>
-                    <option value="kitchen">Kitchen Backsplash</option>
-                    <option value="floor">Floor Tiling</option>
-                    <option value="outdoor">Outdoor / Patio</option>
-                    <option value="commercial">Commercial Space</option>
-                    <option value="other">Other Tiling Project</option>
-                  </select>
-                  {fieldErrors.projectType && <p className="mt-1 text-xs text-red-600 ml-1">{fieldErrors.projectType}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-surface-700 mb-2 ml-1">
-                    Project Details <span className="text-red-500">*</span>
-                  </label>
-                  <textarea 
-                    id="message" 
-                    name="message"
-                    rows={4} 
-                    value={formData.message}
-                    onChange={handleChange}
-                    required 
-                    disabled={status === 'submitting'}
-                    placeholder="Tell us about room dimensions, preferred tile material (ceramic/porcelain/stone), current condition, and timeline..." 
-                    className={`w-full px-5 py-4 rounded-2xl bg-surface-50 border text-surface-900 placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none shadow-inner shadow-surface-200/20 ${fieldErrors.message ? 'border-red-400 bg-red-50/30' : 'border-surface-200'}`}
-                  />
-                  {fieldErrors.message && <p className="mt-1 text-xs text-red-600 ml-1">{fieldErrors.message}</p>}
-                </div>
-
-                {turnstileSiteKey && (
-                  <div className="flex justify-center my-2">
-                    <Turnstile
-                      siteKey={turnstileSiteKey}
-                      onSuccess={(token) => setTurnstileToken(token)}
-                      onError={() => setTurnstileToken('')}
-                      onExpire={() => setTurnstileToken('')}
-                    />
-                  </div>
-                )}
-
-                <button 
-                  type="submit" 
-                  disabled={status === 'submitting'}
-                  className="group w-full bg-primary-600 hover:bg-primary-500 disabled:opacity-75 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_40px_-10px_var(--color-primary-500)] hover:shadow-[0_0_60px_-15px_var(--color-primary-500)] mt-8 cursor-pointer"
-                >
-                  {status === 'submitting' ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      Submitting Request...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-5 w-5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300" />
-                      Request Free Quote
-                    </>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {status === 'error' && (
+                    <div className="p-3 bg-red-500/20 border border-red-500/40 rounded-xl flex items-center gap-2.5 text-red-300 text-xs">
+                      <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
+                      <span>{errorMessage || 'Failed to submit quote. Please check your information.'}</span>
+                    </div>
                   )}
-                </button>
-              </form>
-            )}
-          </motion.div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="firstName" className="block text-xs font-medium text-surface-700 mb-1.5">
+                        First Name <span className="text-red-400">*</span>
+                      </label>
+                      <input 
+                        type="text" 
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        required 
+                        disabled={status === 'submitting'}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border text-surface-900 text-xs placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all ${fieldErrors.firstName ? 'border-red-400 bg-red-500/10' : 'border-surface-300'}`}
+                        placeholder="John" 
+                      />
+                      {fieldErrors.firstName && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.firstName}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="lastName" className="block text-xs font-medium text-surface-700 mb-1.5">
+                        Last Name <span className="text-red-400">*</span>
+                      </label>
+                      <input 
+                        type="text" 
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        required 
+                        disabled={status === 'submitting'}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border text-surface-900 text-xs placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all ${fieldErrors.lastName ? 'border-red-400 bg-red-500/10' : 'border-surface-300'}`}
+                        placeholder="Doe" 
+                      />
+                      {fieldErrors.lastName && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.lastName}</p>}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="email" className="block text-xs font-medium text-surface-700 mb-1.5">
+                        Email Address <span className="text-red-400">*</span>
+                      </label>
+                      <input 
+                        type="email" 
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required 
+                        disabled={status === 'submitting'}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border text-surface-900 text-xs placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all ${fieldErrors.email ? 'border-red-400 bg-red-500/10' : 'border-surface-300'}`}
+                        placeholder="john@example.com" 
+                      />
+                      {fieldErrors.email && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.email}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-xs font-medium text-surface-700 mb-1.5">
+                        Phone Number <span className="text-red-400">*</span>
+                      </label>
+                      <input 
+                        type="tel" 
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required 
+                        disabled={status === 'submitting'}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border text-surface-900 text-xs placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all ${fieldErrors.phone ? 'border-red-400 bg-red-500/10' : 'border-surface-300'}`}
+                        placeholder="(0400) 000-000" 
+                      />
+                      {fieldErrors.phone && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.phone}</p>}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="projectType" className="block text-xs font-medium text-surface-700 mb-1.5">
+                      Service Required <span className="text-red-400">*</span>
+                    </label>
+                    <select 
+                      id="projectType"
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleChange}
+                      required 
+                      disabled={status === 'submitting'}
+                      className={`w-full px-4 py-3 rounded-xl bg-surface-950/80 border text-white text-xs focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all ${fieldErrors.projectType ? 'border-red-400' : 'border-surface-300'}`}
+                    >
+                      <option value="" disabled className="bg-white">Select project scope...</option>
+                      <option value="bathroom" className="bg-white">Bathroom / Ensuite Renovation</option>
+                      <option value="kitchen" className="bg-white">Kitchen & Splashback Tiling</option>
+                      <option value="pool" className="bg-white">Pool Coping & Waterline</option>
+                      <option value="outdoor" className="bg-white">Outdoor Veranda / Patio</option>
+                      <option value="floor" className="bg-white">Main Floor Slabs & Screed</option>
+                      <option value="commercial" className="bg-white">Commercial / Custom Layout</option>
+                    </select>
+                    {fieldErrors.projectType && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.projectType}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-xs font-medium text-surface-700 mb-1.5">
+                      Project Notes & Dimensions <span className="text-red-400">*</span>
+                    </label>
+                    <textarea 
+                      id="message" 
+                      name="message"
+                      rows={3} 
+                      value={formData.message}
+                      onChange={handleChange}
+                      required 
+                      disabled={status === 'submitting'}
+                      placeholder="Approximate m², tile type (porcelain, stone, mosaic), location..." 
+                      className={`w-full px-4 py-3 rounded-xl bg-white border text-surface-900 text-xs placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none ${fieldErrors.message ? 'border-red-400' : 'border-surface-300'}`}
+                    />
+                    {fieldErrors.message && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.message}</p>}
+                  </div>
+
+                  {turnstileSiteKey && (
+                    <div className="flex justify-center my-1">
+                      <Turnstile
+                        siteKey={turnstileSiteKey}
+                        onSuccess={(token) => setTurnstileToken(token)}
+                        onError={() => setTurnstileToken('')}
+                        onExpire={() => setTurnstileToken('')}
+                      />
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit" 
+                    disabled={status === 'submitting'}
+                    className="w-full bg-primary-600 hover:bg-primary-500 disabled:opacity-75 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-primary-600/30 text-xs sm:text-sm cursor-pointer"
+                  >
+                    {status === 'submitting' ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" />
+                        Submit Estimation Request
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+
+            </div>
+          </div>
 
         </div>
       </div>
