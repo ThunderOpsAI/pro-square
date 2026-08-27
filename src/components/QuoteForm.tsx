@@ -33,7 +33,7 @@ export function QuoteForm() {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
-  const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '(555) 123-4567';
+  const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -248,7 +248,7 @@ export function QuoteForm() {
                         required 
                         disabled={status === 'submitting'}
                         className={`w-full px-4 py-3 rounded-xl bg-white border text-surface-900 text-xs placeholder-surface-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all ${fieldErrors.phone ? 'border-red-400 bg-red-500/10' : 'border-surface-300'}`}
-                        placeholder="(0400) 000-000" 
+                        placeholder="0400 000 000" 
                       />
                       {fieldErrors.phone && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.phone}</p>}
                     </div>
@@ -274,6 +274,7 @@ export function QuoteForm() {
                       <option value="outdoor" className="bg-white">Outdoor Veranda / Patio</option>
                       <option value="floor" className="bg-white">Main Floor Slabs & Screed</option>
                       <option value="commercial" className="bg-white">Commercial / Custom Layout</option>
+                      <option value="other" className="bg-white">Other (Please specify in notes)</option>
                     </select>
                     {fieldErrors.projectType && <p className="mt-1 text-[10px] text-red-400">{fieldErrors.projectType}</p>}
                   </div>

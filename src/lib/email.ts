@@ -112,7 +112,7 @@ export async function sendCustomerConfirmation(data: LeadEmailData): Promise<boo
   }
 
   const from = process.env.RESEND_FROM_EMAIL || 'Pro Square Tiling <onboarding@resend.dev>';
-  const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '(555) 123-4567';
+  const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
 
   const html = `
     <!DOCTYPE html>

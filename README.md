@@ -58,7 +58,7 @@ cp .env.example .env.local
 | `ADMIN_EMAIL` | Admin login email (default: `admin@prosquaretiling.com`) |
 | `ADMIN_PASSWORD` | Admin login password (default: `AdminSecure2026!`) |
 | `ADMIN_SESSION_SECRET` | 32+ char random string for session cookie encryption |
-| `NEXT_PUBLIC_BUSINESS_PHONE` | Business phone displayed on site (default: `(555) 123-4567`) |
+| `NEXT_PUBLIC_BUSINESS_PHONE` | Business phone displayed on site (default: `0467 551 492`) |
 
 ### 4. Database Setup & Seeding
 ```bash

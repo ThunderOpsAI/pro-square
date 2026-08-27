@@ -172,7 +172,7 @@ export const BRANDING = {
   companyName: 'Pro Square Tiling',
   tagline: 'Master Craftsmanship &bull; Precision Installation',
   motto: 'Setting the Standard in Premium Ceramic, Porcelain & Stone Finishes',
-  phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE || '(0400) 000-000',
+  phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492',
   email: process.env.BUSINESS_OWNER_EMAIL || 'info@prosquaretiling.com.au',
   website: 'https://prosquaretiling.com.au',
   abn: 'XX XXX XXX XXX',

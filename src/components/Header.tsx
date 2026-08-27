@@ -8,7 +8,7 @@ import Image from 'next/image';
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '(555) 123-4567';
+  const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
   const cleanPhone = phoneNumber.replace(/[^0-9+]/g, '');
 
   useEffect(() => {

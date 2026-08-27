@@ -4,7 +4,7 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 
 export function Footer() {
-  const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '(555) 123-4567';
+  const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
   const cleanPhone = phoneNumber.replace(/[^0-9+]/g, '');
 
   const handlePhoneClick = () => {
@@ -38,7 +38,7 @@ export function Footer() {
               />
             </div>
             <p className="leading-relaxed transition-colors">
-              Setting the standard for quality tiling services. We deliver precision, durability, and stunning aesthetics for every project.
+              Owned and operated by Michael Perex. Setting the standard for quality tiling services. We deliver precision, durability, and stunning aesthetics for every project.
             </p>
           </div>
 
