@@ -47,14 +47,16 @@ export function Header() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-2"
           >
-            <Image
-              src="/images/pro-square-logo.png"
-              alt="Pro Square Tiling"
-              width={200}
-              height={76}
-              className="h-12 w-auto object-contain rounded-lg drop-shadow-md"
-              priority
-            />
+            <div className="rounded-xl overflow-hidden shadow-md border border-white/20 bg-surface-900">
+              <Image
+                src="/images/pro-square-logo.png"
+                alt="Pro Square Tiling"
+                width={220}
+                height={80}
+                className="h-12 sm:h-14 w-auto object-contain"
+                priority
+              />
+            </div>
           </motion.div>
           
           <motion.nav 

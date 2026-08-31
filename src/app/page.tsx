@@ -9,10 +9,10 @@ import { ScrollingBackground } from '@/components/ScrollingBackground';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen font-sans selection:bg-primary-200 text-surface-900 transition-colors duration-500">
+    <div className="relative min-h-screen font-sans selection:bg-primary-200 text-surface-900 transition-colors duration-500 overflow-x-hidden">
       <ScrollingBackground />
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Services />
         <Gallery />

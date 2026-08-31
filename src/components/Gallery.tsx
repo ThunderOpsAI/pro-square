@@ -99,11 +99,7 @@ export function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-20 bg-black/[0.04] relative overflow-hidden transition-colors duration-500 border-t border-surface-300/30">
-      {/* Match top gradient to new transparency approach */}
-
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/[0.02] to-transparent z-0 pointer-events-none" />
-
+    <section id="gallery" className="py-20 relative overflow-hidden transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8">
         
         {/* Section Header with View Mode Toggle */}

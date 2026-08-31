@@ -6,17 +6,18 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Sparkles, 
   ArrowRight, 
-  CheckCircle2, 
+  PhoneCall, 
   ShieldCheck, 
-  Ruler, 
-  Layers, 
+  ChevronDown,
+  Layers,
+  Ruler,
+  CheckCircle2,
   Flame,
   Waves,
   Bath,
   UtensilsCrossed,
   LayoutGrid,
-  Landmark,
-  PhoneCall
+  Landmark
 } from 'lucide-react';
 
 const SPACES = [
@@ -26,7 +27,7 @@ const SPACES = [
     icon: Flame,
     category: 'Alfresco & Stone',
     image: '/images/projects/project-04-outdoor-kitchen.jpg',
-    headline: 'Seamless Outdoor Living',
+    headline: 'Seamless Outdoor Living & Hearth Craft',
     description: 'Rustic luxury outdoor cooking station with large-format porcelain slabs, custom alcove subway backsplashes, and integrated hearth junctions.',
     specs: {
       tileType: 'Large-Format Slate Slabs & Gloss Subway',
@@ -41,7 +42,7 @@ const SPACES = [
     icon: Waves,
     category: 'Pool & Exterior',
     image: '/images/projects/project-11-pool-alfresco.jpg',
-    headline: 'Architectural Waterscapes',
+    headline: 'Architectural Waterscapes & Travertine',
     description: 'Precision-cut travertine stone coping with drop-face rebated edges and iridescent glass mosaic waterline tiling.',
     specs: {
       tileType: 'Travertine Pavers & Glass Mosaics',
@@ -56,7 +57,7 @@ const SPACES = [
     icon: Bath,
     category: 'Master Bathroom',
     image: '/images/projects/project-13-master-ensuite.jpg',
-    headline: 'Master Ensuite Sanctuary',
+    headline: 'Master Ensuite Sanctuary & Calacatta',
     description: 'Floor-to-ceiling Calacatta gold porcelain slab wall tiling paired with a seamless curbless walk-in shower and herringbone floor.',
     specs: {
       tileType: 'Calacatta Gold Slabs & Timber Herringbone',
@@ -114,220 +115,191 @@ const SPACES = [
 
 export function Hero() {
   const [selectedIdx, setSelectedIdx] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [showSpecs, setShowSpecs] = useState(false);
   const activeSpace = SPACES[selectedIdx];
 
   const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
   const cleanPhone = phone.replace(/[^0-9]/g, '');
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * -20;
-    const y = (e.clientY / window.innerHeight - 0.5) * -20;
-    setMousePos({ x, y });
-  };
-
   useEffect(() => {
     const timer = setInterval(() => {
       setSelectedIdx((prev) => (prev + 1) % SPACES.length);
-    }, 9000);
+    }, 10000);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div 
-      className="relative bg-surface-950 overflow-hidden min-h-[86vh] flex items-center transition-colors duration-500"
-      onMouseMove={handleMouseMove}
-    >
-      {/* BACKGROUND IMAGE & PARALLAX CANVAS */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+    <div className="relative bg-surface-950 text-white min-h-[92vh] flex flex-col justify-between overflow-hidden">
+      
+      {/* FULL BLEED LUMINOUS PHOTO BACKGROUND */}
+      <div className="absolute inset-0 z-0">
         <AnimatePresence mode="popLayout">
           <motion.div
             key={activeSpace.id}
-            initial={{ opacity: 0, scale: 1.08 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1.03,
-              x: mousePos.x,
-              y: mousePos.y
-            }}
-            exit={{ opacity: 0, scale: 1.03 }}
-            transition={{ 
-              opacity: { duration: 0.8, ease: "easeInOut" },
-              scale: { duration: 0.8, ease: "easeOut" },
-              x: { type: "spring", stiffness: 35, damping: 30 },
-              y: { type: "spring", stiffness: 35, damping: 30 }
-            }}
-            className="absolute -inset-8"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1.01 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="absolute inset-0"
           >
             <Image
               src={activeSpace.image}
               alt={activeSpace.name}
               fill
-              priority={selectedIdx === 0}
+              priority
               sizes="100vw"
-              className="object-cover brightness-75 contrast-105"
+              className="object-cover brightness-[1.02] contrast-100"
             />
           </motion.div>
         </AnimatePresence>
 
-        {/* Tile Pattern Grid Overlay + Vignette Gradient */}
-        <div className="absolute inset-0 bg-tile-pattern-dark opacity-30 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-surface-950/90 via-surface-950/60 to-surface-950/40 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-transparent to-surface-950/60 z-10" />
-        
-        {/* Soft Ambient Radial Light */}
-        <div className="absolute top-1/4 right-1/4 w-[450px] h-[450px] bg-primary-500/20 blur-[130px] rounded-full pointer-events-none z-10" />
+        {/* Minimal natural top/bottom gradient allowing stone/tile photo details to pop */}
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/25 to-surface-950/80 z-10" />
       </div>
 
-      {/* HERO CONTENT */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-12 w-full z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* TOP: GRAND BRAND EMBLEM & HEADER BAR */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 w-full text-center">
+        
+        {/* Prominent Center Brand Lockup with distinct signature purple logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex flex-col sm:flex-row items-center gap-3.5 p-2 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-surface-900/90 backdrop-blur-xl border border-primary-500/30 shadow-2xl mx-auto mb-6"
+        >
+          <div className="rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0">
+            <Image
+              src="/images/pro-square-logo.png"
+              alt="Pro Square Tiling"
+              width={200}
+              height={70}
+              className="h-9 sm:h-11 w-auto object-contain"
+              priority
+            />
+          </div>
+          <span className="hidden sm:block h-5 w-px bg-white/25" />
+          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-primary-300">
+            Local Architectural & Luxury Tiling
+          </span>
+        </motion.div>
+
+        {/* Hero Headline */}
+        <motion.h1
+          key={activeSpace.headline}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl sm:text-6xl font-black tracking-tight text-white drop-shadow-lg max-w-4xl mx-auto leading-tight"
+        >
+          {activeSpace.headline}
+        </motion.h1>
+
+        <motion.p
+          key={activeSpace.description}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mt-3 text-base sm:text-lg text-surface-100 max-w-2xl mx-auto font-medium drop-shadow-md bg-surface-950/50 p-2.5 rounded-xl backdrop-blur-md inline-block"
+        >
+          {activeSpace.description}
+        </motion.p>
+      </div>
+
+      {/* BOTTOM: FLOATING CONTROL DOCK & SPEC ACCORDION */}
+      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 w-full">
+        <div className="bg-surface-900/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-4 sm:p-5 shadow-2xl ring-1 ring-white/10">
           
-          {/* LEFT: HEADLINE & SPACE CONTROLS */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 text-primary-300 text-xs font-bold tracking-widest uppercase border border-white/15 mb-4 backdrop-blur-md"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-primary-400" />
-              <span>Melbourne Architectural Tiling</span>
-            </motion.div>
-
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]"
-            >
-              Master Craftsmanship for <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-primary-300 to-amber-200">
-                {activeSpace.name}
-              </span>
-            </motion.h1>
-
-            <motion.p 
-              key={activeSpace.description}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="mt-4 text-base sm:text-lg text-surface-200 max-w-xl font-light leading-relaxed drop-shadow-sm"
-            >
-              {activeSpace.description}
-            </motion.p>
-
-            {/* SPACE SWITCHER BUTTONS */}
-            <div className="mt-6">
-              <div className="flex flex-wrap gap-2">
-                {SPACES.map((space, idx) => {
-                  const Icon = space.icon;
-                  const isSelected = selectedIdx === idx;
-                  return (
-                    <button
-                      key={space.id}
-                      onClick={() => setSelectedIdx(idx)}
-                      className={`group px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300 flex items-center gap-2 border cursor-pointer ${
-                        isSelected
-                          ? 'bg-primary-600 text-white border-primary-500 shadow-lg shadow-primary-600/40 scale-105'
-                          : 'bg-surface-900/70 hover:bg-surface-800 text-surface-300 border-white/10 hover:border-white/20 backdrop-blur-md'
-                      }`}
-                    >
-                      <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-primary-400'}`} />
-                      <span>{space.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
+          {/* TOP ROW: SPACE PILLS & ACTION CTAs */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            {/* Space Navigation Chips */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+              {SPACES.map((space, idx) => {
+                const Icon = space.icon;
+                const isSelected = selectedIdx === idx;
+                return (
+                  <button
+                    key={space.id}
+                    onClick={() => setSelectedIdx(idx)}
+                    className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                      isSelected
+                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/50 scale-105 ring-2 ring-primary-400'
+                        : 'bg-white/10 hover:bg-white/20 text-surface-200'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{space.name}</span>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* ACTION CTAs */}
-            <div className="mt-8 flex flex-wrap gap-3.5">
+            {/* Quick Action Buttons */}
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={() => setShowSpecs(!showSpecs)}
+                className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-surface-200 border border-white/10 flex items-center gap-1.5 cursor-pointer transition-all"
+              >
+                <span>{showSpecs ? 'Hide Specs' : 'View Specs'}</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showSpecs ? 'rotate-180' : ''}`} />
+              </button>
+
               <a
                 href="#quote"
-                className="group inline-flex items-center justify-center px-7 py-3.5 text-sm sm:text-base font-semibold rounded-xl text-white bg-primary-600 hover:bg-primary-500 shadow-xl shadow-primary-600/30 transition-all duration-300 hover:scale-[1.02]"
+                className="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-primary-600 hover:bg-primary-500 text-white shadow-lg shadow-primary-600/30 flex items-center gap-1.5 transition-all hover:scale-105"
               >
-                Get a Free Quote
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
+                Free Quote
+                <ArrowRight className="w-3.5 h-3.5" />
               </a>
+
               <a
                 href={`tel:${cleanPhone}`}
-                className="inline-flex items-center justify-center px-6 py-3.5 text-sm sm:text-base font-semibold rounded-xl text-white bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/15 transition-all duration-300"
+                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-primary-300 border border-white/10"
+                title={`Call ${phone}`}
               >
-                <PhoneCall className="mr-2 h-4 w-4 text-primary-400" />
-                Call {phone}
+                <PhoneCall className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* RIGHT: SPECIFICATION CARD */}
-          <div className="lg:col-span-5">
-            <motion.div
-              key={activeSpace.id}
-              initial={{ opacity: 0, x: 20, scale: 0.96 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="bg-surface-900/80 backdrop-blur-2xl border border-white/15 p-6 rounded-3xl shadow-2xl relative overflow-hidden"
-            >
-              <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${activeSpace.accent}`} />
-
-              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider text-primary-400 font-bold">
-                    Project Breakdown
-                  </span>
-                  <h3 className="text-lg font-bold text-white mt-0.5">
-                    {activeSpace.name}
-                  </h3>
-                </div>
-                <span className="px-2.5 py-1 bg-white/10 text-surface-200 text-xs font-semibold rounded-full border border-white/10">
-                  {activeSpace.category}
-                </span>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3 p-2.5 rounded-xl bg-surface-950/60 border border-white/5">
-                  <div className="p-2 rounded-lg bg-primary-500/20 text-primary-400 shrink-0">
-                    <Layers className="w-3.5 h-3.5" />
-                  </div>
+          {/* EXPANDABLE SPEC DRAWER */}
+          <AnimatePresence>
+            {showSpecs && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden mt-4 pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3"
+              >
+                <div className="p-3 rounded-xl bg-surface-950/70 border border-white/10 flex items-center gap-3">
+                  <Layers className="w-4 h-4 text-primary-400 shrink-0" />
                   <div>
-                    <p className="text-[10px] uppercase font-bold tracking-wider text-surface-400">Material Specification</p>
-                    <p className="text-xs font-medium text-white">{activeSpace.specs.tileType}</p>
+                    <p className="text-[10px] uppercase font-bold text-surface-400">Material Specification</p>
+                    <p className="text-xs font-semibold text-white">{activeSpace.specs.tileType}</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-2.5 rounded-xl bg-surface-950/60 border border-white/5">
-                  <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 shrink-0">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                  </div>
+                <div className="p-3 rounded-xl bg-surface-950/70 border border-white/10 flex items-center gap-3">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                   <div>
-                    <p className="text-[10px] uppercase font-bold tracking-wider text-surface-400">Substrate & Waterproofing</p>
-                    <p className="text-xs font-medium text-white">{activeSpace.specs.subfloor}</p>
+                    <p className="text-[10px] uppercase font-bold text-surface-400">Substrate & Membrane</p>
+                    <p className="text-xs font-semibold text-white">{activeSpace.specs.subfloor}</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-2.5 rounded-xl bg-surface-950/60 border border-white/5">
-                  <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 shrink-0">
-                    <Ruler className="w-3.5 h-3.5" />
-                  </div>
+                <div className="p-3 rounded-xl bg-surface-950/70 border border-white/10 flex items-center gap-3">
+                  <Ruler className="w-4 h-4 text-amber-400 shrink-0" />
                   <div>
-                    <p className="text-[10px] uppercase font-bold tracking-wider text-surface-400">Master Craft Execution</p>
-                    <p className="text-xs font-medium text-white">{activeSpace.specs.specialty}</p>
+                    <p className="text-[10px] uppercase font-bold text-surface-400">Artisan Craft Detail</p>
+                    <p className="text-xs font-semibold text-white">{activeSpace.specs.specialty}</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-surface-400">
-                <span>AS 3958.1 & AS 3740 Certified</span>
-                <span className="text-emerald-400 font-bold flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> 10-Year Warranty
-                </span>
-              </div>
-            </motion.div>
-          </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
         </div>
       </div>
+
     </div>
   );
 }

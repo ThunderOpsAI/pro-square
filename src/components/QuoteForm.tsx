@@ -98,7 +98,7 @@ export function QuoteForm() {
   };
 
   return (
-    <section id="quote" className="py-20 relative overflow-hidden bg-black/[0.06] text-surface-900 transition-colors duration-500 border-t border-surface-300/30">
+    <section id="quote" className="py-20 relative overflow-hidden text-surface-900 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
