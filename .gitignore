@@ -27,3 +27,6 @@ next-env.d.ts
 
 # Vercel
 .vercel
+
+# AI & Agent artifacts
+.agents/
