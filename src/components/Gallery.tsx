@@ -51,6 +51,41 @@ const projectGallery = [
     category: 'Outdoor & Verandas',
     tag: 'Patterned Encaustic Tiles'
   },
+  {
+    id: 7,
+    src: '/images/projects/project-14-grey-ensuite-during.jpg',
+    alt: 'Ensuite Mid-Renovation with Levelling Clips & Grey Stone',
+    category: 'Bathrooms',
+    tag: 'Large Format Grey Stone'
+  },
+  {
+    id: 8,
+    src: '/images/projects/project-15-timber-ceiling-shower.jpg',
+    alt: 'Walk-in Shower with Timber Ceiling & Chrome Fixtures',
+    category: 'Bathrooms',
+    tag: 'White Porcelain & Timber Feature'
+  },
+  {
+    id: 9,
+    src: '/images/projects/project-16-wave-tile-bathroom.png',
+    alt: 'Bathroom with Wave-Texture Wall Tile & Bathtub',
+    category: 'Bathrooms',
+    tag: '3D Wave Tile & Grey Floor'
+  },
+  {
+    id: 10,
+    src: '/images/projects/project-17-oak-vanity-bath.png',
+    alt: 'Modern Bathroom with Oak Floating Vanity & Freestanding Bath',
+    category: 'Bathrooms',
+    tag: 'Oak Vanity & Matte Black Fixtures'
+  },
+  {
+    id: 11,
+    src: '/images/projects/project-18-double-vanity-ensuite.png',
+    alt: 'Spacious Ensuite with Glass Shower & Grey Feature Wall',
+    category: 'Bathrooms',
+    tag: 'Grey Feature Wall & Double Vanity'
+  },
 ];
 
 const COMPARISON_SETS = [
@@ -71,6 +106,15 @@ const COMPARISON_SETS = [
     afterImage: '/images/projects/project-02-charcoal-shower.jpg',
     afterLabel: 'Phase 2: Completed Slate Shower',
     milestones: ['1:60 Slope Screed to Waste', 'Radial Diamond Cuts', 'Floor-to-Ceiling Slabs', 'Watertight Perimeter Seals']
+  },
+  {
+    id: 'grey-ensuite-reno',
+    title: 'Ensuite Renovation: Bare Cement to Full Stone',
+    beforeImage: '/images/projects/project-14-grey-ensuite-before.jpg',
+    beforeLabel: 'Phase 1: Cement Sheet & Framing',
+    afterImage: '/images/projects/project-14-grey-ensuite-after.jpg',
+    afterLabel: 'Phase 2: Completed Stone Ensuite',
+    milestones: ['Steel Stud Framing & Niche Recess', 'AS 3740 Waterproofing Membrane', 'Large-Format Stone with Levelling Clips', 'Niche Finishing & Grout Seal']
   }
 ];
 

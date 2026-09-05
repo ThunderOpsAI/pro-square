@@ -35,6 +35,21 @@ const COMPARISON_SETS = [
       { step: '03', title: 'Full Slab Cladding', desc: 'Floor-to-ceiling charcoal stone slabs.' },
       { step: '04', title: 'Brushed Fixture Seal', desc: 'Watertight silicone seals around mixers & shower.' },
     ]
+  },
+  {
+    id: 'grey-ensuite-reno',
+    title: 'Full Ensuite: Bare Cement to Floor-to-Ceiling Stone',
+    subtitle: 'A complete bathroom transformation from exposed framing and cement sheet through to precision-laid grey stone with recessed niche.',
+    beforeImage: '/images/projects/project-14-grey-ensuite-before.jpg',
+    beforeLabel: 'Phase 1: Cement Sheet & Framing',
+    afterImage: '/images/projects/project-14-grey-ensuite-after.jpg',
+    afterLabel: 'Phase 2: Completed Stone Ensuite',
+    milestones: [
+      { step: '01', title: 'Stud Framing & Niche', desc: 'Steel stud wall framing with pre-cut shower niche recess.' },
+      { step: '02', title: 'Cement Sheet & Waterproofing', desc: 'Fibre cement substrate with AS 3740 membrane system.' },
+      { step: '03', title: 'Large-Format Stone Tiling', desc: 'Floor-to-ceiling grey stone with levelling clip system.' },
+      { step: '04', title: 'Niche & Fixture Finishing', desc: 'Recessed niche shelving, floor drain alignment & grout seal.' },
+    ]
   }
 ];
 
