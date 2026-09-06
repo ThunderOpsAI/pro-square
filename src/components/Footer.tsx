@@ -75,7 +75,21 @@ export function Footer() {
         </div>
         
         <div className="mt-12 pt-8 border-t border-surface-300/40 text-center text-sm text-surface-500 transition-colors">
-          <p className="transition-colors">&copy; {new Date().getFullYear()} Pro Square Tiling. All rights reserved.</p>
+          <p className="transition-colors">
+            <span 
+              role="button"
+              tabIndex={0}
+              onClick={() => window.location.href = '/admin/login'}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  window.location.href = '/admin/login';
+                }
+              }}
+              className="cursor-default hover:cursor-pointer hover:text-surface-400 transition-colors select-none focus:outline-none"
+              title=""
+            >©</span> {new Date().getFullYear()} Pro Square Tiling. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -1,13 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Sparkles, 
-  ArrowRight, 
-  PhoneCall, 
-  CheckCircle2,
   Flame,
   Waves,
   Bath,
@@ -18,19 +14,19 @@ import {
 
 const SPACES = [
   {
-    id: 'outdoor-kitchen',
-    name: 'Outdoor Kitchen',
-    icon: Flame,
-    category: 'Alfresco & Stone',
-    image: '/images/projects/project-04-outdoor-kitchen.jpg',
-    headline: 'Seamless Outdoor Living & Hearth Craft',
-    description: 'Rustic luxury outdoor cooking station with large-format porcelain slabs, custom alcove subway backsplashes, and integrated hearth junctions.',
+    id: 'master-ensuite',
+    name: 'Luxury Ensuite',
+    icon: Bath,
+    category: 'Master Bathroom',
+    image: '/images/projects/project-13-master-ensuite.jpg',
+    headline: 'Master Ensuite Sanctuary & Calacatta',
+    description: 'Floor-to-ceiling Calacatta gold porcelain slab wall tiling paired with a seamless curbless walk-in shower and herringbone floor.',
     specs: {
-      tileType: 'Large-Format Slate Slabs & Gloss Subway',
-      subfloor: 'Reinforced Concrete Screed (1:80 Fall)',
-      specialty: 'UV & thermal expansion heat-shielding',
+      tileType: 'Calacatta Gold Slabs & Timber Herringbone',
+      subfloor: 'Dual-Layer Polyurethane Membrane (AS 3740)',
+      specialty: 'Mitered 45° external corners & curbless walk-in',
     },
-    accent: 'from-amber-500 to-orange-600'
+    accent: 'from-emerald-500 to-teal-600'
   },
   {
     id: 'pool-alfresco',
@@ -48,19 +44,19 @@ const SPACES = [
     accent: 'from-sky-500 to-blue-600'
   },
   {
-    id: 'master-ensuite',
-    name: 'Luxury Ensuite',
-    icon: Bath,
-    category: 'Master Bathroom',
-    image: '/images/projects/project-13-master-ensuite.jpg',
-    headline: 'Master Ensuite Sanctuary & Calacatta',
-    description: 'Floor-to-ceiling Calacatta gold porcelain slab wall tiling paired with a seamless curbless walk-in shower and herringbone floor.',
+    id: 'outdoor-kitchen',
+    name: 'Outdoor Kitchen',
+    icon: Flame,
+    category: 'Alfresco & Stone',
+    image: '/images/projects/project-04-outdoor-kitchen.jpg',
+    headline: 'Seamless Outdoor Living & Hearth Craft',
+    description: 'Rustic luxury outdoor cooking station with large-format porcelain slabs, custom alcove subway backsplashes, and integrated hearth junctions.',
     specs: {
-      tileType: 'Calacatta Gold Slabs & Timber Herringbone',
-      subfloor: 'Dual-Layer Polyurethane Membrane (AS 3740)',
-      specialty: 'Mitered 45° external corners & curbless walk-in',
+      tileType: 'Large-Format Slate Slabs & Gloss Subway',
+      subfloor: 'Reinforced Concrete Screed (1:80 Fall)',
+      specialty: 'UV & thermal expansion heat-shielding',
     },
-    accent: 'from-emerald-500 to-teal-600'
+    accent: 'from-amber-500 to-orange-600'
   },
   {
     id: 'modern-kitchen',
@@ -112,16 +108,30 @@ const SPACES = [
 export function Hero() {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const activeSpace = SPACES[selectedIdx];
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
-  const cleanPhone = phone.replace(/[^0-9]/g, '');
+  const startTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    timerRef.current = setInterval(() => {
+      setSelectedIdx((prev) => (prev + 1) % SPACES.length);
+    }, 3000);
+  }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setSelectedIdx((prev) => (prev + 1) % SPACES.length);
-    }, 10000);
-    return () => clearInterval(timer);
-  }, []);
+    startTimer();
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [startTimer]);
+
+  const handleSelectSpace = (idx: number) => {
+    setSelectedIdx(idx);
+    startTimer();
+  };
 
   return (
     <div className="relative bg-surface-950 text-white min-h-[92vh] flex flex-col justify-between overflow-hidden">
@@ -155,23 +165,12 @@ export function Hero() {
       {/* TOP: GRAND BRAND EMBLEM & HEADER BAR */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 w-full text-center">
         
-        {/* Prominent Center Brand Lockup with distinct signature purple logo */}
+        {/* Brand Lockup Pill */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex flex-col sm:flex-row items-center gap-3.5 p-2 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-full bg-surface-900/90 backdrop-blur-xl border border-primary-500/30 shadow-2xl mx-auto mb-6"
+          className="inline-flex items-center px-5 py-2.5 rounded-full bg-surface-900/90 backdrop-blur-xl border border-primary-500/30 shadow-2xl mx-auto mb-6"
         >
-          <div className="rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0">
-            <Image
-              src="/images/pro-square-logo.png"
-              alt="Pro Square Tiling"
-              width={200}
-              height={70}
-              className="h-9 sm:h-11 w-auto object-contain"
-              priority
-            />
-          </div>
-          <span className="hidden sm:block h-5 w-px bg-white/25" />
           <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-primary-300">
             Local Architectural & Luxury Tiling
           </span>
@@ -199,55 +198,30 @@ export function Hero() {
         </motion.p>
       </div>
 
-      {/* BOTTOM: FLOATING CONTROL DOCK & SPEC ACCORDION */}
+      {/* BOTTOM: FLOATING CONTROL DOCK */}
       <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 w-full">
         <div className="bg-surface-900/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-4 sm:p-5 shadow-2xl ring-1 ring-white/10">
-          
-          {/* TOP ROW: SPACE PILLS & ACTION CTAs */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            
-            {/* Space Navigation Chips */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
-              {SPACES.map((space, idx) => {
-                const Icon = space.icon;
-                const isSelected = selectedIdx === idx;
-                return (
-                  <button
-                    key={space.id}
-                    onClick={() => setSelectedIdx(idx)}
-                    className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
-                      isSelected
-                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/50 scale-105 ring-2 ring-primary-400'
-                        : 'bg-white/10 hover:bg-white/20 text-surface-200'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span>{space.name}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Quick Action Buttons */}
-            <div className="flex items-center gap-3 shrink-0">
-              <a
-                href="#quote"
-                className="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-primary-600 hover:bg-primary-500 text-white shadow-lg shadow-primary-600/30 flex items-center gap-1.5 transition-all hover:scale-105"
-              >
-                Free Quote
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-
-              <a
-                href={`tel:${cleanPhone}`}
-                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-primary-300 border border-white/10"
-                title={`Call ${phone}`}
-              >
-                <PhoneCall className="w-4 h-4" />
-              </a>
-            </div>
+          {/* Space Navigation Chips */}
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {SPACES.map((space, idx) => {
+              const Icon = space.icon;
+              const isSelected = selectedIdx === idx;
+              return (
+                <button
+                  key={space.id}
+                  onClick={() => handleSelectSpace(idx)}
+                  className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                    isSelected
+                      ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/50 scale-105 ring-2 ring-primary-400'
+                      : 'bg-white/10 hover:bg-white/20 text-surface-200'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{space.name}</span>
+                </button>
+              );
+            })}
           </div>
-
         </div>
       </div>
 

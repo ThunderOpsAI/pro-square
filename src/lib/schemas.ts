@@ -266,4 +266,13 @@ export const MaterialPresetSchema = z.object({
 
 export type MaterialPresetInput = z.infer<typeof MaterialPresetSchema>;
 
+export const ReviewInputSchema = z.object({
+  customerName: z.string().min(2, 'Name must be at least 2 characters'),
+  starRating: z.coerce.number().int().min(1).max(5),
+  reviewText: z.string().min(10, 'Review must be at least 10 characters').max(1000),
+  projectType: z.string().optional(),
+});
+
+export type ReviewInput = z.infer<typeof ReviewInputSchema>;
+
 

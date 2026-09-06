@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Home, UtensilsCrossed, Maximize, Landmark } from 'lucide-react';
+import { Home, UtensilsCrossed, Maximize, Landmark } from 'lucide-react';
 import { motion, type Variants } from 'motion/react';
 import Image from 'next/image';
 
@@ -28,10 +28,10 @@ const services = [
   },
   {
     name: 'Precision Screed & Custom Patterns',
-    description: '4-way diagonal envelope drainage falls, Victorian tessellated layouts, and 45° mitered edging.',
+    description: '4-way diagonal envelope drainage falls, Victorian tessellated layouts, and precision laser-aligned screeding to AS 3958.1 standards.',
     icon: Landmark,
     image: '/images/projects/project-08-envelope-drain.jpg',
-    tag: 'AS 3958.1 Laser Level'
+    tag: '45° Mitred Edging'
   },
 ];
 
@@ -54,7 +54,7 @@ const cardVariants: Variants = {
 
 export function Services() {
   return (
-    <section id="services" className="py-20 relative overflow-hidden transition-colors duration-500">
+    <section id="services" className="py-12 relative overflow-hidden transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
@@ -76,14 +76,6 @@ export function Services() {
               Every project is installed to strict Australian Standards with premium adhesives, laser alignment, and a 10-year warranty.
             </p>
           </div>
-
-          <a
-            href="#quote"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors group"
-          >
-            <span>Request customized project estimate</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
         </motion.div>
 
         {/* 4 Core Services Grid */}
