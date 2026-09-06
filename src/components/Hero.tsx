@@ -7,10 +7,6 @@ import {
   Sparkles, 
   ArrowRight, 
   PhoneCall, 
-  ShieldCheck, 
-  ChevronDown,
-  Layers,
-  Ruler,
   CheckCircle2,
   Flame,
   Waves,
@@ -115,7 +111,6 @@ const SPACES = [
 
 export function Hero() {
   const [selectedIdx, setSelectedIdx] = useState(0);
-  const [showSpecs, setShowSpecs] = useState(false);
   const activeSpace = SPACES[selectedIdx];
 
   const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
@@ -154,7 +149,7 @@ export function Hero() {
         </AnimatePresence>
 
         {/* Minimal natural top/bottom gradient allowing stone/tile photo details to pop */}
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/25 to-surface-950/80 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-950/70 via-surface-950/25 to-surface-950/80 z-10" />
       </div>
 
       {/* TOP: GRAND BRAND EMBLEM & HEADER BAR */}
@@ -235,14 +230,6 @@ export function Hero() {
 
             {/* Quick Action Buttons */}
             <div className="flex items-center gap-3 shrink-0">
-              <button
-                onClick={() => setShowSpecs(!showSpecs)}
-                className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-surface-200 border border-white/10 flex items-center gap-1.5 cursor-pointer transition-all"
-              >
-                <span>{showSpecs ? 'Hide Specs' : 'View Specs'}</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showSpecs ? 'rotate-180' : ''}`} />
-              </button>
-
               <a
                 href="#quote"
                 className="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-primary-600 hover:bg-primary-500 text-white shadow-lg shadow-primary-600/30 flex items-center gap-1.5 transition-all hover:scale-105"
@@ -260,42 +247,6 @@ export function Hero() {
               </a>
             </div>
           </div>
-
-          {/* EXPANDABLE SPEC DRAWER */}
-          <AnimatePresence>
-            {showSpecs && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="overflow-hidden mt-4 pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3"
-              >
-                <div className="p-3 rounded-xl bg-surface-950/70 border border-white/10 flex items-center gap-3">
-                  <Layers className="w-4 h-4 text-primary-400 shrink-0" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-surface-400">Material Specification</p>
-                    <p className="text-xs font-semibold text-white">{activeSpace.specs.tileType}</p>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-surface-950/70 border border-white/10 flex items-center gap-3">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-surface-400">Substrate & Membrane</p>
-                    <p className="text-xs font-semibold text-white">{activeSpace.specs.subfloor}</p>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-surface-950/70 border border-white/10 flex items-center gap-3">
-                  <Ruler className="w-4 h-4 text-amber-400 shrink-0" />
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-surface-400">Artisan Craft Detail</p>
-                    <p className="text-xs font-semibold text-white">{activeSpace.specs.specialty}</p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
 
         </div>
       </div>

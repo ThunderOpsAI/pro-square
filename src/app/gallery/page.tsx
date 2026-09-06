@@ -1,20 +1,23 @@
 import { Header } from '@/components/Header';
-import { Hero } from '@/components/Hero';
-import { Services } from '@/components/Services';
-import { QuoteForm } from '@/components/QuoteForm';
+import { Gallery } from '@/components/Gallery';
+import { BeforeAfterSection } from '@/components/BeforeAfterSection';
 import { Footer } from '@/components/Footer';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { ScrollingBackground } from '@/components/ScrollingBackground';
 
-export default function HomePage() {
+export const metadata = {
+  title: 'Project Gallery | Pro Square Tiling',
+  description: 'Browse our portfolio of bathroom, kitchen, outdoor, and heritage tiling projects.',
+};
+
+export default function GalleryPage() {
   return (
     <div className="relative min-h-screen font-sans selection:bg-primary-200 text-surface-900 transition-colors duration-500 overflow-x-hidden">
       <ScrollingBackground />
       <Header />
       <main className="relative z-10">
-        <Hero />
-        <Services />
-        <QuoteForm />
+        <Gallery />
+        <BeforeAfterSection />
       </main>
       <Footer />
       <ThemeSwitcher />
