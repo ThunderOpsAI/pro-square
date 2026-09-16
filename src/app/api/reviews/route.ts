@@ -10,9 +10,9 @@ export async function GET() {
     });
 
     return NextResponse.json({ success: true, reviews });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Public Reviews GET Error]', error);
-    return NextResponse.json({ error: 'Failed to fetch reviews' }, { status: 500 });
+    return NextResponse.json({ error: error.message || String(error) }, { status: 500 });
   }
 }
 
@@ -41,8 +41,8 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, review }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Public Reviews POST Error]', error);
-    return NextResponse.json({ error: 'Failed to submit review' }, { status: 500 });
+    return NextResponse.json({ error: error.message || String(error) }, { status: 500 });
   }
 }
