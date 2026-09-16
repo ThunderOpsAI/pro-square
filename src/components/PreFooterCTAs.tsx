@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Star, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function PreFooterCTAs() {
@@ -18,9 +18,6 @@ export function PreFooterCTAs() {
               className="h-full p-6 sm:p-7 rounded-2xl bg-white/80 backdrop-blur border border-surface-200 shadow-sm hover:shadow-xl hover:border-primary-500/40 transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4 group-hover:scale-105 group-hover:bg-amber-500/20 transition-all">
-                  <Star className="w-6 h-6 fill-amber-400 text-amber-500" />
-                </div>
                 <h3 className="text-xl font-bold text-surface-900 group-hover:text-primary-600 transition-colors">
                   Leave a Review
                 </h3>
@@ -43,9 +40,6 @@ export function PreFooterCTAs() {
               className="h-full p-6 sm:p-7 rounded-2xl bg-white/80 backdrop-blur border border-surface-200 shadow-sm hover:shadow-xl hover:border-primary-500/40 transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-primary-600/10 text-primary-600 flex items-center justify-center mb-4 group-hover:scale-105 group-hover:bg-primary-600/20 transition-all">
-                  <ArrowRight className="w-6 h-6" />
-                </div>
                 <h3 className="text-xl font-bold text-surface-900 group-hover:text-primary-600 transition-colors">
                   Request a Quote
                 </h3>
