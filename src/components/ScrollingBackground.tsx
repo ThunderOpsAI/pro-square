@@ -3,33 +3,64 @@
 import React from 'react';
 
 /**
- * Dual-tone architectural background.
- * Color 1 (#d6d0c6) for the 1st half of the page (0% - 40%),
- * Smooth 10% fade on either side of halfway (40% - 60%),
- * Color 2 (#cac4bb) for the 2nd half (60% - 100%).
+ * Animated Transitioning Background
+ * Crossfades between Hexagon and Diamond patterns over a shifting color gradient.
  */
-
-const tilePatternSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='none' stroke='%238a7d6b' stroke-width='1' opacity='0.13'%3E%3Cpath d='M0 0h24v12H0zM24 12h24v12H24zM0 24h24v12H0zM24 36h24v12H24z'/%3E%3Cpath d='M12 0v12M36 12v12M12 24v12M36 36v12'/%3E%3C/g%3E%3C/svg%3E")`;
-
 export function ScrollingBackground() {
   return (
-    <div
-      className="absolute inset-0 -z-20 pointer-events-none w-full min-h-full"
-      style={{
-        background: 'linear-gradient(to bottom, #d6d0c6 0%, #d6d0c6 40%, #d0cac0 60%, #d0cac0 100%)',
-      }}
-    >
-      {/* Continuous architectural tile pattern texture overlay */}
-      <div className="absolute inset-0" style={{ backgroundImage: tilePatternSvg }} />
-      
-      {/* Subtle organic stone grain */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
+    <>
+      <style>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes patternFadeHex {
+          0%, 10%, 90%, 100% { opacity: 0.12; }
+          40%, 60% { opacity: 0; }
+        }
+        @keyframes patternFadeDia {
+          0%, 20%, 80%, 100% { opacity: 0; }
+          45%, 55% { opacity: 0.15; }
+        }
+        .bg-animate-gradient {
+          background-size: 200% 200%;
+          animation: gradientShift 15s ease infinite;
+        }
+        .pattern-hex {
+          animation: patternFadeHex 16s ease-in-out infinite;
+        }
+        .pattern-dia {
+          animation: patternFadeDia 16s ease-in-out infinite;
+        }
+      `}</style>
+      <div 
+        className="absolute inset-0 -z-20 pointer-events-none w-full min-h-full bg-animate-gradient"
+        style={{ 
+          backgroundImage: 'linear-gradient(120deg, #d6d0c6 0%, #f4f1eb 25%, #e2ddd5 50%, #c7c0b6 75%, #d6d0c6 100%)',
         }}
-      />
-    </div>
+      >
+        {/* Hexagon Pattern */}
+        <svg className="w-full h-full fixed pattern-hex" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hexagons-bg" width="50" height="43.4" patternUnits="userSpaceOnUse">
+              <path fill="none" stroke="#2a251f" strokeWidth="1.5" d="M25 0 L50 14.4 L50 43.3 L25 57.7 L0 43.3 L0 14.4 Z" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hexagons-bg)" />
+        </svg>
+
+        {/* Diamond Pattern */}
+        <svg className="w-full h-full fixed pattern-dia" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="diamonds-bg" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path fill="none" stroke="#111" strokeWidth="1" d="M20 0 L40 20 L20 40 L0 20 Z" />
+              <path fill="none" stroke="#111" strokeWidth="0.5" d="M10 10 L30 30 M30 10 L10 30" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#diamonds-bg)" />
+        </svg>
+      </div>
+    </>
   );
 }
