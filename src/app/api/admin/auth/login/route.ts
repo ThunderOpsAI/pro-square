@@ -50,7 +50,23 @@ export async function POST(req: NextRequest) {
     }
 
     // Verify Password Hash
-    const isMatch = await bcrypt.compare(password, admin.passwordHash);
+    let isMatch = await bcrypt.compare(password, admin.passwordHash);
+
+    // If password doesn't match hash, check if it matches updated ADMIN_PASSWORD in environment
+    if (!isMatch) {
+      const defaultEmail = (process.env.ADMIN_EMAIL || 'admin@prosquaretiling.com').toLowerCase().trim();
+      const defaultPassword = process.env.ADMIN_PASSWORD;
+
+      if (defaultPassword && normalizedEmail === defaultEmail && password === defaultPassword) {
+        const newHash = await bcrypt.hash(defaultPassword, 12);
+        await prisma.adminUser.update({
+          where: { id: admin.id },
+          data: { passwordHash: newHash },
+        });
+        isMatch = true;
+      }
+    }
+
     if (!isMatch) {
       return NextResponse.json(
         { success: false, error: 'Invalid email or password' },
@@ -74,10 +90,13 @@ export async function POST(req: NextRequest) {
         name: admin.name,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Admin Login Error]', error);
     return NextResponse.json(
-      { success: false, error: 'Internal server error during authentication' },
+      {
+        success: false,
+        error: error?.message || 'Internal server error during authentication',
+      },
       { status: 500 }
     );
   }

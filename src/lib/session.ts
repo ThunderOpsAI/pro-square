@@ -14,8 +14,9 @@ export const defaultSession: AdminSessionData = {
 
 // 32+ characters password for iron-session encryption
 const sessionPassword =
-  process.env.ADMIN_SESSION_SECRET ||
-  'pro-square-secure-admin-session-secret-key-32-chars-minimum-prod';
+  process.env.ADMIN_SESSION_SECRET && process.env.ADMIN_SESSION_SECRET.trim().length >= 32
+    ? process.env.ADMIN_SESSION_SECRET.trim()
+    : 'pro-square-secure-admin-session-secret-key-32-chars-minimum-prod';
 
 export const sessionOptions: SessionOptions = {
   password: sessionPassword,
