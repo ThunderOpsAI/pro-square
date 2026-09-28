@@ -69,6 +69,11 @@ export function QuoteForm() {
       return;
     }
 
+    if (turnstileSiteKey && !turnstileToken) {
+      setErrorMessage('Please complete the security verification challenge below before submitting.');
+      return;
+    }
+
     setStatus('submitting');
 
     try {

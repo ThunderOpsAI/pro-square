@@ -14,7 +14,7 @@ export async function verifyTurnstileToken(token?: string, ip?: string): Promise
   }
 
   if (!token) {
-    return { success: false, error: 'Bot verification token missing' };
+    return { success: false, error: 'Security verification check missing. Please complete the security check and try again.' };
   }
 
   try {
