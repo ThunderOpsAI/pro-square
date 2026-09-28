@@ -20,11 +20,13 @@ import {
   CheckCircle2,
   Layers,
   FileSpreadsheet,
+  UploadCloud,
 } from 'lucide-react';
 import { GstVaultCard } from '@/components/admin/budget/GstVaultCard';
 import { TaxReserveCard } from '@/components/admin/budget/TaxReserveCard';
 import { MonthlyTrendBar } from '@/components/admin/budget/MonthlyTrendBar';
 import { TransactionModal } from '@/components/admin/budget/TransactionModal';
+import { ReceiptUploadModal } from '@/components/admin/budget/ReceiptUploadModal';
 import { TransactionTable } from '@/components/admin/budget/TransactionTable';
 import {
   BudgetSummary,
@@ -56,6 +58,7 @@ export default function AdminBudgetPage() {
   const [loadingTransactions, setLoadingTransactions] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
   const [editingTransaction, setEditingTransaction] = useState<BudgetTransaction | null>(null);
 
   // Fetch Budget Summary (Metric Cards, GST Vault, Tax Reserve, Monthly Trends)
@@ -286,6 +289,15 @@ export default function AdminBudgetPage() {
             <RefreshCw
               className={`h-4 w-4 ${loadingSummary || loadingTransactions ? 'animate-spin' : ''}`}
             />
+          </button>
+
+          {/* AI Scan Bill / Receipt Button */}
+          <button
+            onClick={() => setIsUploadModalOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-emerald-950/40 transition-all cursor-pointer"
+          >
+            <UploadCloud className="h-4 w-4" />
+            <span>Scan Bill / Receipt</span>
           </button>
 
           {/* New Transaction Button */}
@@ -522,6 +534,13 @@ export default function AdminBudgetPage() {
         onClose={() => setIsModalOpen(false)}
         onSuccess={handleModalSuccess}
         transactionToEdit={editingTransaction}
+      />
+
+      {/* AI RECEIPT & BILL UPLOAD MODAL */}
+      <ReceiptUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onSuccess={handleModalSuccess}
       />
     </div>
   );
