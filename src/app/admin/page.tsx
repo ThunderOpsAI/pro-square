@@ -14,6 +14,7 @@ import {
   Layers,
   AlertCircle
 } from 'lucide-react';
+import CallDivertBanner from '@/components/admin/CallDivertBanner';
 
 interface StatsResponse {
   totalQuotes: number;
@@ -110,6 +111,9 @@ export default function AdminOverviewPage() {
           Refresh Data
         </button>
       </div>
+ 
+      {/* Call Diversion Banner */}
+      <CallDivertBanner />
 
       {error && (
         <div className="p-4 bg-red-950/50 border border-red-800 rounded-2xl flex items-center gap-3 text-red-300 text-sm">
