@@ -5,9 +5,21 @@ import { Footer } from '@/components/Footer';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { ScrollingBackground } from '@/components/ScrollingBackground';
 
+const galleryTitle = 'Tiling Project Gallery | Wangaratta & North East VIC | Pro Square Tiling';
+const galleryDescription =
+  'Before & after photos of French cut mitred, slab, bathroom, kitchen, pool and heritage veranda tiling projects across Wangaratta, Beechworth, Benalla & Albury–Wodonga.';
+
 export const metadata = {
-  title: 'Project Gallery | Pro Square Tiling',
-  description: 'Browse our portfolio of bathroom, kitchen, outdoor, and heritage tiling projects.',
+  title: galleryTitle,
+  description: galleryDescription,
+  alternates: { canonical: '/gallery' },
+  openGraph: {
+    title: galleryTitle,
+    description: galleryDescription,
+    url: '/gallery',
+    type: 'website',
+    images: [{ url: '/images/projects/project-11-pool-alfresco.jpg', alt: 'Pool and travertine coping tiling project' }],
+  },
 };
 
 export default function GalleryPage() {

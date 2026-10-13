@@ -2,6 +2,8 @@
 
 import { Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { SERVICES, SERVICE_AREAS } from '@/lib/seo';
 
 export function Footer() {
   const phoneNumber = process.env.NEXT_PUBLIC_BUSINESS_PHONE || '0467 551 492';
@@ -70,6 +72,27 @@ export function Footer() {
                 </span>
               </li>
             </ul>
+          </div>
+
+          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-surface-900 font-semibold mb-4 uppercase tracking-wider text-sm">Tiling Services</h3>
+              <ul className="space-y-2 text-sm">
+                {SERVICES.map((s) => (
+                  <li key={s.slug}>
+                    <Link href={`/services/${s.slug}`} className="hover:text-surface-900 transition-colors">
+                      {s.navName}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-surface-900 font-semibold mb-4 uppercase tracking-wider text-sm">Service Areas</h3>
+              <p className="text-sm leading-relaxed text-surface-600">
+                {SERVICE_AREAS.join(' · ')} and surrounding North East Victoria.
+              </p>
+            </div>
           </div>
           
         </div>

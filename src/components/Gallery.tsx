@@ -152,9 +152,9 @@ export function Gallery() {
             <span className="inline-block py-1 px-3.5 rounded-full bg-primary-100 border border-primary-200 text-primary-700 text-xs font-bold tracking-widest uppercase mb-3">
               Proven Excellence
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-surface-900 transition-colors">
-              Featured Work & Substrate Quality
-            </h2>
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-surface-900 transition-colors">
+              Tiling Project Gallery: Featured Work &amp; Substrate Quality
+            </h1>
           </div>
 
           {/* Mode Switcher */}
@@ -282,7 +282,7 @@ export function Gallery() {
               className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden select-none cursor-ew-resize border border-surface-200 group shadow-sm"
             >
               <div className="absolute inset-0">
-                <Image src={activeSet.afterImage} alt="After" fill className="object-cover" />
+                <Image src={activeSet.afterImage} alt={`${activeSet.title}: after (${activeSet.afterLabel})`} fill sizes="(max-width: 1280px) 100vw, 1280px" className="object-cover" />
                 <span className="absolute top-3 right-3 z-20 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[11px] font-bold text-surface-900 shadow border border-surface-100">
                   {activeSet.afterLabel}
                 </span>
@@ -291,7 +291,7 @@ export function Gallery() {
                 style={{ clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)` }}
                 className="absolute inset-0 z-10"
               >
-                <Image src={activeSet.beforeImage} alt="Before" fill className="object-cover" />
+                <Image src={activeSet.beforeImage} alt={`${activeSet.title}: before (${activeSet.beforeLabel})`} fill sizes="(max-width: 1280px) 100vw, 1280px" className="object-cover" />
                 <span className="absolute top-3 left-3 z-20 px-3 py-1 rounded-full bg-surface-900/90 backdrop-blur-md text-[11px] font-bold text-white shadow border border-surface-800">
                   {activeSet.beforeLabel}
                 </span>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Star, MessageSquareQuote, ThumbsUp } from 'lucide-react';
 import { motion } from 'motion/react';
 
-interface ReviewItem {
+export interface ReviewItem {
   id: string;
   customerName: string;
   starRating: number;
@@ -13,11 +13,13 @@ interface ReviewItem {
   createdAt: string;
 }
 
-export function ApprovedReviews() {
-  const [reviews, setReviews] = useState<ReviewItem[]>([]);
-  const [loading, setLoading] = useState(true);
+export function ApprovedReviews({ initialReviews }: { initialReviews?: ReviewItem[] } = {}) {
+  const [reviews, setReviews] = useState<ReviewItem[]>(initialReviews ?? []);
+  const [loading, setLoading] = useState(!initialReviews);
 
   useEffect(() => {
+    // Server already supplied reviews (SEO-friendly); skip the client fetch.
+    if (initialReviews) return;
     fetch('/api/reviews')
       .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((data) => {
@@ -31,7 +33,7 @@ export function ApprovedReviews() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [initialReviews]);
 
   const averageRating = reviews.length
     ? (reviews.reduce((acc, r) => acc + r.starRating, 0) / reviews.length).toFixed(1)

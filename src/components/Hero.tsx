@@ -149,7 +149,7 @@ export function Hero() {
           >
             <Image
               src={activeSpace.image}
-              alt={activeSpace.name}
+              alt={`${activeSpace.name}: ${activeSpace.description}`}
               fill
               priority
               sizes="100vw"
@@ -165,19 +165,19 @@ export function Hero() {
       {/* TOP: GRAND BRAND EMBLEM & HEADER BAR */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 w-full text-center">
         
-        {/* Brand Lockup Pill */}
+        {/* Brand Lockup Pill — static, keyword-rich H1 for SEO */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           className="inline-flex items-center px-5 py-2.5 rounded-full bg-surface-900/90 backdrop-blur-xl border border-primary-500/30 shadow-2xl mx-auto mb-6"
         >
-          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-primary-300">
-            Local Architectural & Luxury Tiling
-          </span>
+          <h1 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-primary-300">
+            French Cut &amp; Luxury Tiling · Wangaratta &amp; North East VIC
+          </h1>
         </motion.div>
 
-        {/* Hero Headline */}
-        <motion.h1
+        {/* Rotating project headline (visual only, not the page H1) */}
+        <motion.p
           key={activeSpace.headline}
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -185,7 +185,7 @@ export function Hero() {
           className="text-4xl sm:text-6xl font-black tracking-tight text-white drop-shadow-lg max-w-4xl mx-auto leading-tight"
         >
           {activeSpace.headline}
-        </motion.h1>
+        </motion.p>
 
         <motion.p
           key={activeSpace.description}

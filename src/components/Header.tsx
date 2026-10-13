@@ -53,6 +53,7 @@ export function Header() {
             transition={{ delay: 0.1, staggerChildren: 0.1 }}
             className="hidden md:flex items-center gap-8"
           >
+            <Link href="/services" className="text-surface-600 hover:text-primary-600 transition-colors font-medium">Services</Link>
             <Link href="/gallery" className="text-surface-600 hover:text-primary-600 transition-colors font-medium">Gallery</Link>
             <Link href="/reviews" className="text-surface-600 hover:text-primary-600 transition-colors font-medium">Reviews</Link>
             <Link href="/quote" className="text-surface-600 hover:text-primary-600 transition-colors font-medium">Quote</Link>
@@ -88,6 +89,7 @@ export function Header() {
             className="md:hidden bg-surface-50/95 backdrop-blur-xl border-t border-surface-200 overflow-hidden shadow-xl"
           >
             <div className="px-4 pt-2 pb-6 space-y-2 mt-2">
+              <Link href="/services" className="block px-4 py-3 text-base font-medium text-surface-600 hover:text-primary-600 hover:bg-white rounded-xl transition-colors shadow-sm" onClick={() => setIsMenuOpen(false)}>Services</Link>
               <Link href="/gallery" className="block px-4 py-3 text-base font-medium text-surface-600 hover:text-primary-600 hover:bg-white rounded-xl transition-colors shadow-sm" onClick={() => setIsMenuOpen(false)}>Gallery</Link>
               <Link href="/reviews" className="block px-4 py-3 text-base font-medium text-surface-600 hover:text-primary-600 hover:bg-white rounded-xl transition-colors shadow-sm" onClick={() => setIsMenuOpen(false)}>Reviews</Link>
               <Link href="/quote" className="block px-4 py-3 text-base font-medium text-surface-600 hover:text-primary-600 hover:bg-white rounded-xl transition-colors shadow-sm" onClick={() => setIsMenuOpen(false)}>Quote</Link>
